@@ -1,0 +1,120 @@
+import React, { useContext } from 'react';
+import { FileContext } from './FileContext';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
+import {useNavigate} from 'react-router-dom';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  annotationPlugin
+);
+
+const CorrosionRate = () => {
+  const { fileDataICE } = useContext(FileContext);
+   const navigate = useNavigate();
+
+  const xKey = 'Chainage (m)';
+  const yKey1 = 'Sce-1 CCR - Worst mmpy';
+  const yKey2 = 'Sce-1 CCR - Realistic mmpy';
+
+  // Clean and trim column headers (just in case)
+  const cleanData = fileDataICE.map(row => {
+    const cleaned = {};
+    Object.keys(row).forEach(key => {
+      cleaned[key.trim()] = row[key];
+    });
+    return cleaned;
+  });
+
+  const labels = cleanData.map((row) => row[xKey]);
+  const worstValues = cleanData.map((row) => row[yKey1]);
+  const RealisticValues = cleanData.map((row) => row[yKey2]);
+
+  const chartData = {
+    labels,
+    datasets: [
+      {
+        label: `${yKey1} vs ${xKey}`,
+        data: worstValues,
+        fill: false,
+        borderColor: 'green',
+        tension: 0.4,
+      },
+
+       {
+        label: `${yKey2} vs ${xKey}`,
+        data: RealisticValues,
+        fill: false,
+        borderColor: 'yellow',
+        tension: 0.4,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: `Elevation & Corrosion Rate - Worst and Realistic`,
+      },
+      legend: {
+        display: true,
+      },
+    },
+
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Chainage (m)',
+        },
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Corrosion Rate (Worst+Realistic)',
+        },
+      },
+    },
+  };
+
+  return(
+    <div>
+
+      <h2>Chart Of Corrosion Rate (Worst + Realistic)</h2>
+     {fileDataICE.length > 0 ? <Line data={chartData} options={options} /> : null}
+
+      {/* Button to show chunks */}
+
+      <div style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+        <button onClick={() => {
+          const input = prompt('Enter chunk size in meters: ');
+          if (input && !isNaN(input)) {
+            window.open(`/cr-chunks?chunk=${input}`, '_blank');
+          }
+        }}>
+          Show Section-wise Charts
+        </button>
+      </div>
+     </div>
+  );
+};
+
+export default CorrosionRate;
