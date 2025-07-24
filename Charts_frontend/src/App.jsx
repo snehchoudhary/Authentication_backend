@@ -39,7 +39,7 @@ import WallLoss from './Components/WallLoss';
 import WallLoss_Chunk from './Components/WallLoss_Chunk';
 import ChartSelector_ICE from './Components/ChartSelector_ICE';
 import Navbar from './Components/Navbar'
-import Footer from './Components/Footer';
+import Footer from './Components/footer';
 
 import MapTilerPolyline from './Components/MapWithPolyline';
 
