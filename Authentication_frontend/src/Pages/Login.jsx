@@ -33,7 +33,7 @@ const Login = () => {
           if(data.success){
             setIsLoggedin(true)
             await getUserData(data.userId)
-            window.location.href = 'http://localhost:5174/'
+            window.location.href = 'https://allied-engineers-data-visualization-5t8a.onrender.com'
           }else{
             toast.error(data.message)
           }
@@ -44,7 +44,7 @@ const Login = () => {
           if(data.success){
             setIsLoggedin(true)
             await getUserData(data.userId)
-            window.location.href = 'http://localhost:5174/'
+            window.location.href = 'https://allied-engineers-data-visualization-5t8a.onrender.com'
 
           }else{
             toast.error(data.message)
