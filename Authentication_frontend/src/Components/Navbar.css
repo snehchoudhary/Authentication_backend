@@ -1,0 +1,90 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  position: absolute;
+  top: 0;
+}
+
+@media (min-width: 640px) {
+  .navbar {
+    padding: 1.5rem 6rem;
+  }
+}
+
+.navbar-logo {
+  width: 7rem; /* default for small screens */
+  margin-left: 1rem;
+
+  /* 8rem for screens >= 640px */
+}
+@media (min-width: 640px) {
+  .navbar-logo {
+    width: 14rem;
+  }
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  margin-right: 1.7rem;
+  color: #4b5563; /* Tailwind's gray-800 */
+  border: 1px solid #6b7280; /* Tailwind's gray-500 */
+  border-radius: 9999px; /* fully rounded */
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  cursor: pointer;
+  background-color: #f3f4f6; /* Tailwind's gray-100 */
+}
+.circle-container {
+  width: 32px;               /* w-8 */
+  height: 32px;              /* h-8 */
+  display: flex;             /* flex */
+  justify-content: center;   /* justify-center */
+  align-items: center;       /* items-center */
+  border-radius: 50%;        /* rounded-full */
+  background-color: black;   /* bg-black */
+  color: white;              /* text-white */
+  position: relative;        /* relative */
+}
+.menu-container {
+  position: absolute;      /* absolute */
+  top: 0;                  /* top-0 */
+  right: 0;                /* right-0 */
+  z-index: 10;             /* z-10 */
+  padding-top: 40px;       /* pt-10 (10 * 4px) */
+  display: none;           /* hidden */
+  color: black;            /* text-black */
+  border-radius: 4px;      /* rounded */
+}
+
+/* To simulate `group-hover`, show menu on parent hover */
+.parent:hover .menu-container {
+  display: block;
+  cursor: pointer;
+}
+
+.menu {
+  list-style: none;        /* list-none */
+  margin: 0;               /* m-0 */
+  padding: 8px;            /* p-2 */
+  background-color: #f3f4f6; /* bg-gray-100 */
+  font-size: 14px;         /* text-sm */
+}
+
+.menu-item {
+  padding: 4px 8px;        /* py-1 px-2 */
+  cursor: pointer;         /* cursor-pointer */
+}
+
+.menu-item:hover {
+  background-color: #e5e7eb; /* hover:bg-gray-200 */
+}
