@@ -11,7 +11,7 @@ const port = process.env.PORT || 4000
 connectDB();
 
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174' ]
+const allowedOrigins = ['https://allied-engineers-data-visualization-7x42.onrender.com', 'https://allied-engineers-data-visualization-5t8a.onrender.com' ]
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({origin: allowedOrigins,credentials: true}))
